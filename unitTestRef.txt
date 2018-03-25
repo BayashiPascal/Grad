@@ -1,0 +1,24 @@
+UnitTestGradCellCreateFree OK
+UnitTestGradCellGetSet OK
+UnitTestGradCell OK
+UnitTestGradCreateFree OK
+UnitTestGradCloneIsSame OK
+UnitTestGradGetSet OK
+UnitTestGradResetFlagBlocked OK
+UnitTestGradEditLinks OK
+UnitTestGradLookupTable OK
+ 0,  0,  0,  0,  0,  0,  0,  0, -1, -1, 
+ 0,  0,  0,  0,  0,  0,  0,  0, -1, -1, 
+ 0,  0,  0,  0,  0,  0,  0,  0,  0, -1, 
+ 0,  0, -1,  0,  0,  0,  0,  0,  1,  1, 
+ 0,  0,  0,  0,  0,  0,  0,  1,  1,  1, 
+ 0,  0,  0,  0,  0,  0,  1,  1,  1,  1, 
+ 0,  0,  0,  0,  1,  1,  1,  1,  1,  1, 
+ 0,  0, -1,  1,  1,  1,  1,  1,  1,  1, 
+ 0, -1,  1,  1,  1,  1,  1,  1,  1,  1, 
+-1,  1, -1,  1,  1,  1,  1,  1,  1,  1, 
+UnitTestGradFlood OK
+<12,13,24,35,46,57,66,75,85>
+UnitTestGradGetPath OK
+UnitTestGrad OK
+UnitTestAll OK
