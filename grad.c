@@ -15,7 +15,8 @@
 
 // Create a new GradCell with index 'id', position 'pos' and 
 // 'nbLink' links
-GradCell* GradCellCreate(int id, int nbLink, VecShort2D* pos) {
+GradCell* GradCellCreate(const int id, const int nbLink, 
+  const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (id < 0) {
     GradErr->_type = PBErrTypeInvalidArg;
@@ -61,7 +62,8 @@ void GradCellFree(GradCell** that) {
 
 // Create a new static GradCell with index 'id', position 'pos' 
 // and 'nbLink' links
-GradCell GradCellCreateStatic(int id, int nbLink, VecShort2D* pos) {
+GradCell GradCellCreateStatic(const int id, const int nbLink, 
+  const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (id < 0) {
     GradErr->_type = PBErrTypeInvalidArg;
@@ -120,17 +122,19 @@ int GradDeltaBOddR[12] = {-1,-1, 0,-1, 1,0, 0,1, -1,1, -1,0};
 
 // Create a new static Grad with dimensions 'dim' and type 'type' with 
 // cells of 'nbLink' sides
-Grad GradCreateStatic(VecShort2D* dim, GradType type, int nbLink);
+Grad GradCreateStatic(const VecShort2D* const dim, const GradType type, 
+  const int nbLink);
 
 // Free memory used by the properties of the Grad 'that'
-void GradFreeStatic(Grad* that);
+void GradFreeStatic(Grad* const that);
 
 // Create a new GradHexa with dimensions 'dim' and type 'type'
-GradHexa* GradHexaCreate(VecShort2D* dim, GradHexaType type);
+GradHexa* GradHexaCreate(const VecShort2D* const dim, 
+  const GradHexaType type);
 
 // Get the appropriate deltas of positions according to the type of the
 // Grad 'that' and the position 'pos'
-int* _GradGetDelta(Grad* that, VecShort2D* pos);
+int* _GradGetDelta(const Grad* const that, const VecShort2D* const pos);
 
 // ================= Polymorphism ==================
 
@@ -144,7 +148,8 @@ int* _GradGetDelta(Grad* that, VecShort2D* pos);
 
 // Create a new static Grad with dimensions 'dim' and type 'type' with 
 // cells of 'nbLink' sides
-Grad GradCreateStatic(VecShort2D* dim, GradType type, int nbLink) {
+Grad GradCreateStatic(const VecShort2D* const dim, const GradType type, 
+  const int nbLink) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -183,7 +188,7 @@ Grad GradCreateStatic(VecShort2D* dim, GradType type, int nbLink) {
 }
 
 // Free memory used by the properties of the Grad 'that'
-void GradFreeStatic(Grad* that) {
+void GradFreeStatic(Grad* const that) {
   // Check arguments
   if (that == NULL)
     // Nothing to do
@@ -194,7 +199,7 @@ void GradFreeStatic(Grad* that) {
 
 // Get the appropriate deltas of positions according to the type of the
 // Grad 'that' and the position 'pos'
-int* _GradGetDelta(Grad* that, VecShort2D* pos) {
+int* _GradGetDelta(const Grad* const that, const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -237,7 +242,8 @@ int* _GradGetDelta(Grad* that, VecShort2D* pos) {
 
 // Create a new GradSquare of dimensions 'dim' and diagonal links 
 // allowed if 'diagLink' equals true
-GradSquare* GradSquareCreate(VecShort2D* dim, bool diagLink) {
+GradSquare* GradSquareCreate(const VecShort2D* const dim, 
+  const bool diagLink) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -291,7 +297,8 @@ void GradSquareFree(GradSquare** that) {
 }
 
 // Create a new GradHexa with dimensions 'dim' and type 'type'
-GradHexa* GradHexaCreate(VecShort2D* dim, GradHexaType type) {
+GradHexa* GradHexaCreate(const VecShort2D* const dim, 
+  const GradHexaType type) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -315,7 +322,7 @@ GradHexa* GradHexaCreate(VecShort2D* dim, GradHexaType type) {
 }
 
 // Create a new GradHexa of dimensions 'dim' and orientation odd-r
-GradHexa* GradHexaCreateOddR(VecShort2D* dim) {
+GradHexa* GradHexaCreateOddR(const VecShort2D* const dim) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -351,7 +358,7 @@ GradHexa* GradHexaCreateOddR(VecShort2D* dim) {
 }
 
 // Create a new GradHexa of dimensions 'dim' and orientation even-r
-GradHexa* GradHexaCreateEvenR(VecShort2D* dim) {
+GradHexa* GradHexaCreateEvenR(const VecShort2D* const dim) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -387,7 +394,7 @@ GradHexa* GradHexaCreateEvenR(VecShort2D* dim) {
 }
 
 // Create a new GradHexa of dimensions 'dim' and orientation odd-q
-GradHexa* GradHexaCreateOddQ(VecShort2D* dim) {
+GradHexa* GradHexaCreateOddQ(const VecShort2D* const dim) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -423,7 +430,7 @@ GradHexa* GradHexaCreateOddQ(VecShort2D* dim) {
 }
 
 // Create a new GradHexa of dimensions 'dim' and orientation even-q
-GradHexa* GradHexaCreateEvenQ(VecShort2D* dim) {
+GradHexa* GradHexaCreateEvenQ(const VecShort2D* const dim) {
 #if BUILDMODE == 0
   if (dim == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -471,7 +478,7 @@ void GradHexaFree(GradHexa** that) {
 }
 
 // Get the GradCell at position 'pos' int the GradHexa 'that'
-GradCell* _GradHexaCellAtPos(GradHexa* that, VecShort2D* pos) {
+GradCell* _GradHexaCellAtPos(GradHexa* const that, VecShort2D* pos) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -505,7 +512,7 @@ GradCell* _GradHexaCellAtPos(GradHexa* that, VecShort2D* pos) {
 // Distances in the matrix are equal to the sum of the value of links 
 // between cells 
 // Negative distance means there is no path for the pair of cell
-MatFloat* _GradGetLookupTableMinDist(Grad* that) {
+MatFloat* _GradGetLookupTableMinDist(const Grad* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -590,7 +597,8 @@ MatFloat* _GradGetLookupTableMinDist(Grad* that) {
 // for distance estimation between cells
 // Return a VecShort of position (index) ordered from 'from' to 'to'
 // Return NULL if there is no path
-VecShort* _GradGetPath(Grad* that, int from, int to, MatFloat* lookup) {
+VecShort* _GradGetPath(const Grad* const that, const int from, 
+  const int to, const MatFloat* const lookup) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -728,8 +736,8 @@ typedef struct GradFloodPod {
 // source 
 // Conflicting cells (several sources arriving at the same step to the 
 // cell) are left undecided (_flood==-1)
-void _GradFlood(Grad* that, VecShort* sources, float distMax, 
-  int stepMax) {
+void _GradFlood(Grad* const that, const VecShort* const sources, 
+  const float distMax, const int stepMax) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -828,137 +836,9 @@ void _GradFlood(Grad* that, VecShort* sources, float distMax,
   }
 }
 
-void _GradFloodOld(Grad* that, VecShort* sources, float distMax, 
-  int stepMax) {
-#if BUILDMODE == 0
-  if (that == NULL) {
-    GradErr->_type = PBErrTypeNullPointer;
-    sprintf(GradErr->_msg, "'that' is null");
-    PBErrCatch(GradErr);
-  }
-  if (sources == NULL) {
-    GradErr->_type = PBErrTypeNullPointer;
-    sprintf(GradErr->_msg, "'sources' is null");
-    PBErrCatch(GradErr);
-  }
-#endif
-  // Reset all the flood value to -1
-  for (int iCell = GradGetArea(that); iCell--;)
-    GradCellSetFlood(GradCellAt(that, iCell), -1);
-  // Get the nb of sources
-  int nbSrc = VecGetDim(sources);
-  // Get the area of the Grad
-  int area = GradGetArea(that);
-  // Declare two arrays to resolve the conflicting cells
-  int* firstSrc = PBErrMalloc(GradErr, sizeof(int) * area);
-  bool* flagConflict = PBErrMalloc(GradErr, sizeof(char) * area);
-  for (int i = area; i--;) {
-    firstSrc[i] = -1;
-    flagConflict[i] = false;
-  }
-  // Declare two sets of GradFloodPod
-  GSet setIn = GSetCreateStatic();
-  GSet setOut = GSetCreateStatic();
-  // For each sources
-  for (int iSource = nbSrc; iSource--;) {
-    // Add the first cell in the set
-    GradFloodPod* pod = PBErrMalloc(GradErr, sizeof(GradFloodPod));
-    pod->_src = iSource;
-    pod->_cell = GradCellAt(that, VecGet(sources, iSource));
-    GSetAddSort(&setIn, pod, 0.0);
-    // Initialise the flood value of sources
-    GradCellSetFlood(GradCellAt(that, 
-      VecGet(sources, iSource)), iSource);
-  }
-  // Declare a variable to memorize the nb of step
-  int nbStep = 0;
-  // Loop on nb of step
-  while (GSetNbElem(&setIn) > 0 && (stepMax < 0 || nbStep < stepMax)) {
-    // For each cell in the setIn
-    while (GSetNbElem(&setIn) > 0) {
-      // Get the distance up to this cell
-      float dist = GSetGetElem(&setIn, 0)->_sortVal;
-      // Pop the cell
-      GradFloodPod* pod = GSetPop(&setIn);
-      // Loop on direction from this cell
-      for (int iLink = GradCellGetNbLink(pod->_cell); iLink--;) {
-        int toCell = GradCellGetLink(pod->_cell, iLink);
-        // If there is a cell in this direction
-        if (toCell != -1) {
-          // Get the distance to this cell from the source
-          float d = dist + GradCellLinkVal(pod->_cell, iLink);
-          // If it's within the max distance
-          if (distMax < 0.0 || d <= distMax) {
-            GradCell* cellTo = GradCellAt(that, toCell);
-            // If it's not yet flooded, not blocked, and not conflicting
-            if (GradCellGetFlood(cellTo) == -1 &&
-              !GradCellIsBlocked(cellTo) &&
-              !(flagConflict[toCell])) {
-              // If this cell has not been reached by another source yet
-              if (firstSrc[toCell] == -1 ||
-                firstSrc[toCell] == pod->_src) {
-                // Add a new pod to the GSet 'setOut'
-                GradFloodPod* npod = 
-                  PBErrMalloc(GradErr, sizeof(GradFloodPod));
-                npod->_src = pod->_src;
-                npod->_cell = cellTo;
-                GSetAddSort(&setOut, npod, d);
-                firstSrc[toCell] = pod->_src;
-              // Else it has been reached by another source
-              } else {
-                // Mark it has a conflicting cell
-                flagConflict[toCell] = true;
-              }
-            }
-          }
-        }
-      }
-      // Free memory used by the GradFloodPod
-      free(pod);
-    }
-    // Now the GSet 'setOut' contains all the cell we try to reach.
-    // Add them back to 'setIn' while resolving conflict of
-    // simultaneous arrival
-    while (GSetNbElem(&setOut) > 0) {
-      // Get the distance up to this cell
-      float dist = GSetGetElem(&setOut, 0)->_sortVal;
-      // Pop the cell
-      GradFloodPod* pod = GSetPop(&setOut);
-      int toCell = GradCellGetId(pod->_cell);
-      // If it hasn't been reached already and it's not a
-      // conflicting cell
-      if (GradCellGetFlood(pod->_cell) == -1 &&
-        !(flagConflict[toCell])) {
-        // Flood it
-        GradCellSetFlood(pod->_cell, pod->_src);
-        // Add it to 'setIn'
-        GSetAddSort(&setIn, pod, dist);
-        // Else it has been reached
-      } else {
-        // Free memory used by the pod
-        free(pod);
-      }
-    }
-    // Increment the number of step
-    ++nbStep;
-  }
-  // Free memory
-  while (GSetNbElem(&setIn) > 0) {
-    GradFloodPod* pod = GSetPop(&setIn);
-    free(pod);
-  }
-  while (GSetNbElem(&setOut) > 0) {
-    // Should never pass here
-    GradFloodPod* pod = GSetPop(&setOut);
-    free(pod);
-  }
-  free(flagConflict);
-  free(firstSrc);
-}
-
 // Get the number of flooded cells from 'iSource'-th source in the Grad
 // 'that'
-int _GradGetFloodArea(Grad* that, int iSource) {
+int _GradGetFloodArea(const Grad* const that, const int iSource) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -982,7 +862,7 @@ int _GradGetFloodArea(Grad* that, int iSource) {
 // Clone the GradSquare 'that'
 // The user data are not cloned but shared between the original and 
 // its clone
-GradSquare* GradSquareClone(GradSquare* that) {
+GradSquare* GradSquareClone(const GradSquare* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1006,7 +886,7 @@ GradSquare* GradSquareClone(GradSquare* that) {
 // Clone the GradHexa 'that'
 // The user data are not cloned but shared between the original and 
 // its clone
-GradHexa* GradHexaClone(GradHexa* that) {
+GradHexa* GradHexaClone(const GradHexa* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1029,7 +909,7 @@ GradHexa* GradHexaClone(GradHexa* that) {
 
 // Return true if the Grad 'that' is same as the Grad 'tho'
 // Return false else
-bool _GradIsSameAs(Grad* that, Grad* tho) {
+bool _GradIsSameAs(const Grad* const that, const Grad* const tho) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1074,8 +954,8 @@ bool _GradIsSameAs(Grad* that, Grad* tho) {
 // Grad 'that'
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveLinkIndex(Grad* that, int fromCell, int toCell, 
-  bool symmetric) {
+void _GradRemoveLinkIndex(Grad* const that, const int fromCell, 
+  const int toCell, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1103,8 +983,8 @@ void _GradRemoveLinkIndex(Grad* that, int fromCell, int toCell,
 // 'dir' in the Grad 'that'
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveDirIndex(Grad* that, int fromCell, int dir,
-  bool symmetric) {
+void _GradRemoveDirIndex(Grad* const that, const int fromCell, 
+  const int dir, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1129,8 +1009,8 @@ void _GradRemoveDirIndex(Grad* that, int fromCell, int dir,
 // Remove all the links from cell 'fromCell' in the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveAllLinkIndex(Grad* that, int fromCell, 
-  bool symmetric) {
+void _GradRemoveAllLinkIndex(Grad* const that, const int fromCell, 
+  const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1155,7 +1035,7 @@ void _GradRemoveAllLinkIndex(Grad* that, int fromCell,
 // Grad 'that'
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
-void _GradAddLinkIndex(Grad* that, int fromCell, int toCell, 
+void _GradAddLinkIndex(Grad* const that, int fromCell, int toCell, 
   bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
@@ -1193,8 +1073,8 @@ void _GradAddLinkIndex(Grad* that, int fromCell, int toCell,
 // 'dir' in the Grad 'that'
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
-void _GradAddDirIndex(Grad* that, int fromCell, int dir,
-  bool symmetric) {
+void _GradAddDirIndex(Grad* const that, int const fromCell, 
+  const int dir, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -1225,8 +1105,8 @@ void _GradAddDirIndex(Grad* that, int fromCell, int dir,
 
 // Add all the links from cell 'fromCell' in the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
-void _GradAddAllLinkIndex(Grad* that, int fromCell, 
-  bool symmetric) {
+void _GradAddAllLinkIndex(Grad* const that, const int fromCell, 
+  const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;

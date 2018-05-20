@@ -8,7 +8,7 @@
 #if BUILDMODE != 0
 inline
 #endif 
-void* GradCellData(GradCell* that) {
+void* GradCellData(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -23,7 +23,7 @@ void* GradCellData(GradCell* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetData(GradCell* that, void* data) {
+void GradCellSetData(GradCell* const that, void* const data) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -38,7 +38,7 @@ void GradCellSetData(GradCell* that, void* data) {
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* GradCellPos(GradCell* that) {
+VecShort2D* GradCellPos(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -46,14 +46,14 @@ VecShort2D* GradCellPos(GradCell* that) {
     PBErrCatch(GradErr);
   }
 #endif
-  return &(that->_pos);
+  return (VecShort2D*)&(that->_pos);
 }
 
 // Get the index of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetId(GradCell* that) {
+int GradCellGetId(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -68,7 +68,7 @@ int GradCellGetId(GradCell* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetLink(GradCell* that, int iLink) {
+int GradCellGetLink(const GradCell* const that, const int iLink) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -89,7 +89,8 @@ int GradCellGetLink(GradCell* that, int iLink) {
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetLink(GradCell* that, int iLink, int iCell) {
+void GradCellSetLink(GradCell* const that, const int iLink, 
+  const int iCell) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -115,7 +116,7 @@ void GradCellSetLink(GradCell* that, int iLink, int iCell) {
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetNbLink(GradCell* that) {
+int GradCellGetNbLink(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -130,7 +131,7 @@ int GradCellGetNbLink(GradCell* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-float GradCellLinkVal(GradCell* that, int iLink) {
+float GradCellLinkVal(const GradCell* const that, const int iLink) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -151,7 +152,8 @@ float GradCellLinkVal(GradCell* that, int iLink) {
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetLinkVal(GradCell* that, int iLink, float val) {
+void GradCellSetLinkVal(GradCell* const that, const int iLink, 
+  const float val) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -172,7 +174,7 @@ void GradCellSetLinkVal(GradCell* that, int iLink, float val) {
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetFlood(GradCell* that) {
+int GradCellGetFlood(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -187,7 +189,7 @@ int GradCellGetFlood(GradCell* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetFlood(GradCell* that, int iSource) {
+void GradCellSetFlood(GradCell* const that, const int iSource) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -202,7 +204,7 @@ void GradCellSetFlood(GradCell* that, int iSource) {
 #if BUILDMODE != 0
 inline
 #endif 
-bool GradCellIsBlocked(GradCell* that) {
+bool GradCellIsBlocked(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -217,7 +219,7 @@ bool GradCellIsBlocked(GradCell* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetBlocked(GradCell* that, bool flag) {
+void GradCellSetBlocked(GradCell* const that, const bool flag) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -236,7 +238,7 @@ void GradCellSetBlocked(GradCell* that, bool flag) {
 #if BUILDMODE != 0
 inline
 #endif 
-GradCell* _GradCellAtIndex(Grad* that, int iCell) {
+GradCell* _GradCellAtIndex(const Grad* const that, const int iCell) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -257,7 +259,8 @@ GradCell* _GradCellAtIndex(Grad* that, int iCell) {
 #if BUILDMODE != 0
 inline
 #endif 
-GradCell* _GradCellAtPos(Grad* that, VecShort2D* pos) {
+GradCell* _GradCellAtPos(const Grad* const that, 
+  const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -281,7 +284,7 @@ GradCell* _GradCellAtPos(Grad* that, VecShort2D* pos) {
 #if BUILDMODE != 0
 inline
 #endif 
-GradType _GradGetType(Grad* that) {
+GradType _GradGetType(const Grad* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -296,7 +299,7 @@ GradType _GradGetType(Grad* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-GradHexaType GradHexaGetType(GradHexa* that) {
+GradHexaType GradHexaGetType(const GradHexa* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -311,7 +314,7 @@ GradHexaType GradHexaGetType(GradHexa* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-int _GradGetArea(Grad* that) {
+int _GradGetArea(const Grad* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -326,7 +329,7 @@ int _GradGetArea(Grad* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* _GradDim(Grad* that) {
+VecShort2D* _GradDim(const Grad* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -334,14 +337,15 @@ VecShort2D* _GradDim(Grad* that) {
     PBErrCatch(GradErr);
   }
 #endif
-  return &(that->_dim);
+  return (VecShort2D*)&(that->_dim);
 }
 
 // Check if the position 'pos' is inside the GradSquare 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-bool _GradIsPosInside(Grad* that, VecShort2D* pos) {
+bool _GradIsPosInside(const Grad* const that, 
+  const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -362,7 +366,7 @@ bool _GradIsPosInside(Grad* that, VecShort2D* pos) {
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradResetFlagBlocked(Grad* that) {
+void _GradResetFlagBlocked(Grad* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -379,7 +383,7 @@ void _GradResetFlagBlocked(Grad* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-bool GradSquareHasDiagonalLink(GradSquare* that) {
+bool GradSquareHasDiagonalLink(const GradSquare* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -397,8 +401,9 @@ bool GradSquareHasDiagonalLink(GradSquare* that) {
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradRemoveLinkPos(Grad* that, VecShort2D* fromCell, 
-  VecShort2D* toCell, bool symmetric) {
+void _GradRemoveLinkPos(Grad* const that, 
+  const VecShort2D* const fromCell, const VecShort2D* const toCell, 
+  const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -430,8 +435,8 @@ void _GradRemoveLinkPos(Grad* that, VecShort2D* fromCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradRemoveDirPos(Grad* that, VecShort2D* fromCell, int dir,
-  bool symmetric) {
+void _GradRemoveDirPos(Grad* const that, 
+  const VecShort2D* const fromCell, const int dir, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -457,8 +462,8 @@ void _GradRemoveDirPos(Grad* that, VecShort2D* fromCell, int dir,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradRemoveAllLinkPos(Grad* that, VecShort2D* fromCell, 
-  bool symmetric) {
+void _GradRemoveAllLinkPos(Grad* const that, 
+  const VecShort2D* const fromCell, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -484,8 +489,8 @@ void _GradRemoveAllLinkPos(Grad* that, VecShort2D* fromCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradAddLinkPos(Grad* that, VecShort2D* fromCell, 
-  VecShort2D* toCell, bool symmetric) {
+void _GradAddLinkPos(Grad* const that, const VecShort2D* const fromCell, 
+  const VecShort2D* const toCell, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -517,8 +522,8 @@ void _GradAddLinkPos(Grad* that, VecShort2D* fromCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradAddDirPos(Grad* that, VecShort2D* fromCell, int dir,
-  bool symmetric) {
+void _GradAddDirPos(Grad* const that, const VecShort2D* const fromCell, 
+  const int dir, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -543,8 +548,8 @@ void _GradAddDirPos(Grad* that, VecShort2D* fromCell, int dir,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradAddAllLinkPos(Grad* that, VecShort2D* fromCell, 
-  bool symmetric) {
+void _GradAddAllLinkPos(Grad* const that, 
+  const VecShort2D* const fromCell, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;

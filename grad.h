@@ -54,92 +54,96 @@ typedef struct GradCell {
 
 // Create a new GradCell with index 'id', position 'pos' and 
 // 'nbLink' links
-GradCell* GradCellCreate(int id, int nbLink, VecShort2D* pos);
+GradCell* GradCellCreate(const int id, const int nbLink, 
+  const VecShort2D* const pos);
 
 // Free the memory used by the GradCell 'that'
 void GradCellFree(GradCell** that);
 
 // Create a new static GradCell with index 'id', position 'pos'
 // and 'nbLink' links
-GradCell GradCellCreateStatic(int id, int nbLink, VecShort2D* pos);
+GradCell GradCellCreateStatic(const int id, const int nbLink, 
+  const VecShort2D* const pos);
 
 // Get the user data of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-void* GradCellData(GradCell* that);
+void* GradCellData(const GradCell* const that);
 
 // Set the user data of the GradCell 'that' to 'data'
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetData(GradCell* that, void* data);
+void GradCellSetData(GradCell* const that, void* const data);
 
 // Get the position of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* GradCellPos(GradCell* that);
+VecShort2D* GradCellPos(const GradCell* const that);
 
 // Get the index of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetId(GradCell* that);
+int GradCellGetId(const GradCell* const that);
 
 // Get the index of 'iLink'-th link of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetLink(GradCell* that, int iLink);
+int GradCellGetLink(const GradCell* const that, const int iLink);
 
 // Set the index of 'iLink'-th link of the GradCell 'that' to 'iCell'
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetLink(GradCell* that, int iLink, int iCell);
+void GradCellSetLink(GradCell* const that, const int iLink, 
+  const int iCell);
 
 // Get the number of links of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetNbLink(GradCell* that);
+int GradCellGetNbLink(const GradCell* const that);
 
 // Get the value of 'iLink'-th link of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-float GradCellLinkVal(GradCell* that, int iLink);
+float GradCellLinkVal(const GradCell* const that, const int iLink);
 
 // Set the value of 'iLink'-th link of the GradCell 'that' to 'val'
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetLinkVal(GradCell* that, int iLink, float val);
+void GradCellSetLinkVal(GradCell* const that, const int iLink, 
+  const float val);
 
 // Get the flood value of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-int GradCellGetFlood(GradCell* that);
+int GradCellGetFlood(const GradCell* const that);
 
 // Set the flood value of the GradCell 'that' to 'iSource'
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetFlood(GradCell* that, int iSource);
+void GradCellSetFlood(GradCell* const that, const int iSource);
 
 // Get the flag blocked of the GradCell 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-bool GradCellIsBlocked(GradCell* that);
+bool GradCellIsBlocked(const GradCell* const that);
 
 // Set the flag blocked of the GradCell 'that' to 'flag'
 #if BUILDMODE != 0
 inline
 #endif 
-void GradCellSetBlocked(GradCell* that, bool flag);
+void GradCellSetBlocked(GradCell* const that, const bool flag);
 
 // ------------- Grad
 
@@ -197,22 +201,23 @@ typedef struct GradHexa {
 
 // Create a new GradSquare of dimensions 'dim' and diagonal links 
 // allowed if 'diagLink' equals true
-GradSquare* GradSquareCreate(VecShort2D* dim, bool diagLink);
+GradSquare* GradSquareCreate(const VecShort2D* const dim, 
+  const bool diagLink);
 
 // Free the memory used by the GradSquare 'that'
 void GradSquareFree(GradSquare** that);
 
 // Create a new GradHexa of dimensions 'dim' and orientation odd-r
-GradHexa* GradHexaCreateOddR(VecShort2D* dim);
+GradHexa* GradHexaCreateOddR(const VecShort2D* const dim);
 
 // Create a new GradHexa of dimensions 'dim' and orientation even-r
-GradHexa* GradHexaCreateEvenR(VecShort2D* dim);
+GradHexa* GradHexaCreateEvenR(const VecShort2D* const dim);
 
 // Create a new GradHexa of dimensions 'dim' and orientation odd-q
-GradHexa* GradHexaCreateOddQ(VecShort2D* dim);
+GradHexa* GradHexaCreateOddQ(const VecShort2D* const dim);
 
 // Create a new GradHexa of dimensions 'dim' and orientation even-q
-GradHexa* GradHexaCreateEvenQ(VecShort2D* dim);
+GradHexa* GradHexaCreateEvenQ(const VecShort2D* const dim);
 
 // Free the memory used by the GradHexa 'that'
 void GradHexaFree(GradHexa** that);
@@ -221,38 +226,39 @@ void GradHexaFree(GradHexa** that);
 #if BUILDMODE != 0
 inline
 #endif 
-GradCell* _GradCellAtIndex(Grad* that, int iCell);
+GradCell* _GradCellAtIndex(const Grad* const that, const int iCell);
 
 // Get the GradCell at position 'pos' int the Grad 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-GradCell* _GradCellAtPos(Grad* that, VecShort2D* pos);
+GradCell* _GradCellAtPos(const Grad* const that, 
+  const VecShort2D* const pos);
 
 // Get the GradType of the Grad 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-GradType _GradGetType(Grad* that);
+GradType _GradGetType(const Grad* const that);
 
 // Get the GradHexaType of the GradHexa 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-GradHexaType GradHexaGetType(GradHexa* that);
+GradHexaType GradHexaGetType(const GradHexa* const that);
 
 // Return true if the GradSquare 'that' has diagonal link
 // Return false else
 #if BUILDMODE != 0
 inline
 #endif 
-bool GradSquareHasDiagonalLink(GradSquare* that);
+bool GradSquareHasDiagonalLink(const GradSquare* const that);
 
 // Get the number of cells (area) of the Grad 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-int _GradGetArea(Grad* that);
+int _GradGetArea(const Grad* const that);
 
 // Get the look up table for distance between each pair of cell of the 
 // Grad 'that'
@@ -261,14 +267,15 @@ int _GradGetArea(Grad* that);
 // Distances in the matrix are equal to the sum of the value of links 
 // between cells 
 // Negative distance means there is no path for the pair of cell
-MatFloat* _GradGetLookupTableMinDist(Grad* that);
+MatFloat* _GradGetLookupTableMinDist(const Grad* const that);
 
 // Get the path from cell at index 'from' to cell at index 'to' in 
 // the Grad 'that' using the A* algorithm and the look up table 'lookup'
 // for distance estimation between cells
 // Return a VecShort of position (index) ordered from 'from' to 'to'
 // Return NULL if there is no path
-VecShort* _GradGetPath(Grad* that, int from, int to, MatFloat* lookup);
+VecShort* _GradGetPath(const Grad* const that, const int from, 
+  const int to, const MatFloat* const lookup);
 
 // Flood the Grad 'that' from positions (index) 'sources' up to a 
 // maximum distance in link's value from the source 'distMax' or
@@ -282,51 +289,52 @@ VecShort* _GradGetPath(Grad* that, int from, int to, MatFloat* lookup);
 // source 
 // Conflicting cells (several sources arriving at the same step to the 
 // cell) are left undecided (_flood==-1)
-void _GradFlood(Grad* that, VecShort* sources, float distMax, 
-  int stepMax);
+void _GradFlood(Grad* const that, const VecShort* const sources, 
+  const float distMax, const int stepMax);
 
 // Get the number of flooded cells from 'iSource'-th source in the Grad
 // 'that'
-int _GradGetFloodArea(Grad* that, int iSource);
+int _GradGetFloodArea(const Grad* const that, const int iSource);
 
 // Get the dimensions of the Grad 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* _GradDim(Grad* that);
+VecShort2D* _GradDim(const Grad* const that);
 
 // Check if the position 'pos' is inside the GradSquare 'that'
 #if BUILDMODE != 0
 inline
 #endif 
-bool _GradIsPosInside(Grad* that, VecShort2D* pos);
+bool _GradIsPosInside(const Grad* const that, 
+  const VecShort2D* const pos);
 
 // Clone the GradSquare 'that'
 // The user data are not cloned but shared between the original and 
 // its clone
-GradSquare* GradSquareClone(GradSquare* that);
+GradSquare* GradSquareClone(const GradSquare* const that);
 
 // Clone the GradHexa 'that'
 // The user data are not cloned but shared between the original and 
 // its clone
-GradHexa* GradHexaClone(GradHexa* that);
+GradHexa* GradHexaClone(const GradHexa* const that);
 
 // Return true if the Grad 'that' is same as the Grad 'tho'
 // Return false else
-bool _GradIsSameAs(Grad* that, Grad* tho);
+bool _GradIsSameAs(const Grad* const that, const Grad* const tho);
 
 // Set the flag blocked of all cells in the Grad 'that' to false
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradResetFlagBlocked(Grad* that);
+void _GradResetFlagBlocked(Grad* const that);
 
 // Remove the link from cell 'fromCell' to cell 'toCell' in the
 // Grad 'that'
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveLinkIndex(Grad* that, int fromCell, int toCell, 
-  bool symmetric);
+void _GradRemoveLinkIndex(Grad* const that, const int fromCell, 
+  const int toCell, const bool symmetric);
 
 // Remove the link from cell at position 'fromCell' to cell at 
 // position 'toCell' in the Grad 'that'
@@ -335,15 +343,16 @@ void _GradRemoveLinkIndex(Grad* that, int fromCell, int toCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradRemoveLinkPos(Grad* that, VecShort2D* fromCell, 
-  VecShort2D* toCell, bool symmetric);
+void _GradRemoveLinkPos(Grad* const that, 
+  const VecShort2D* const fromCell, const VecShort2D* const toCell, 
+  const bool symmetric);
 
 // Remove the link from cell at position 'fromCell' toward direction 
 // 'dir' in the Grad 'that'
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveDirIndex(Grad* that, int fromCell, int dir,
-  bool symmetric);
+void _GradRemoveDirIndex(Grad* const that, const int fromCell, 
+  const int dir, const bool symmetric);
 
 // Remove the link from cell at position 'fromCell' toward direction 
 // 'dir' in the Grad 'that'
@@ -352,14 +361,14 @@ void _GradRemoveDirIndex(Grad* that, int fromCell, int dir,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradRemoveDirPos(Grad* that, VecShort2D* fromCell, int dir,
-  bool symmetric);
+void _GradRemoveDirPos(Grad* const that, 
+  const VecShort2D* const fromCell, const int dir, const bool symmetric);
 
 // Remove all the links from cell 'fromCell' in the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveAllLinkIndex(Grad* that, int fromCell, 
-  bool symmetric);
+void _GradRemoveAllLinkIndex(Grad* const that, const int fromCell, 
+  const bool symmetric);
 
 // Remove all the links from cell at position 'fromCell' in 
 // the Grad 'that'
@@ -368,15 +377,15 @@ void _GradRemoveAllLinkIndex(Grad* that, int fromCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradRemoveAllLinkPos(Grad* that, VecShort2D* fromCell, 
-  bool symmetric);
+void _GradRemoveAllLinkPos(Grad* const that, 
+  const VecShort2D* const fromCell, const bool symmetric);
 
 // Add the link from cell 'fromCell' to cell 'toCell' in the
 // Grad 'that'
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
-void _GradAddLinkIndex(Grad* that, int fromCell, int toCell, 
-  bool symmetric);
+void _GradAddLinkIndex(Grad* const that, const int fromCell, 
+  const int toCell, const bool symmetric);
 
 // Add the link from cell at position 'fromCell' to cell at 
 // position 'toCell' in the Grad 'that'
@@ -385,15 +394,15 @@ void _GradAddLinkIndex(Grad* that, int fromCell, int toCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradAddLinkPos(Grad* that, VecShort2D* fromCell, 
-  VecShort2D* toCell, bool symmetric);
+void _GradAddLinkPos(Grad* const that, const VecShort2D* const fromCell, 
+  const VecShort2D* const toCell, const bool symmetric);
 
 // Add the link from cell at position 'fromCell' toward direction 
 // 'dir' in the Grad 'that'
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
-void _GradAddDirIndex(Grad* that, int fromCell, int dir,
-  bool symmetric);
+void _GradAddDirIndex(Grad* const that, const int fromCell, const int dir,
+  const bool symmetric);
 
 // Add the link from cell at position 'fromCell' toward direction 
 // 'dir' in the Grad 'that'
@@ -402,13 +411,13 @@ void _GradAddDirIndex(Grad* that, int fromCell, int dir,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradAddDirPos(Grad* that, VecShort2D* fromCell, int dir,
-  bool symmetric);
+void _GradAddDirPos(Grad* const that, const VecShort2D* const fromCell, 
+  const int dir, const bool symmetric);
 
 // Add all the links from cell 'fromCell' in the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
-void _GradAddAllLinkIndex(Grad* that, int fromCell, 
-  bool symmetric);
+void _GradAddAllLinkIndex(Grad* const that, const int fromCell, 
+  const bool symmetric);
 
 // Add all the links from cell at position 'fromCell' in 
 // the Grad 'that'
@@ -416,8 +425,8 @@ void _GradAddAllLinkIndex(Grad* that, int fromCell,
 #if BUILDMODE != 0
 inline
 #endif 
-void _GradAddAllLinkPos(Grad* that, VecShort2D* fromCell, 
-  bool symmetric);
+void _GradAddAllLinkPos(Grad* const that, 
+  const VecShort2D* const fromCell, const bool symmetric);
 
 // ================= Polymorphism ==================
 
@@ -437,25 +446,49 @@ void _GradAddAllLinkPos(Grad* that, VecShort2D* fromCell,
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_), Pos)
+  const Grad*: _Generic(Pos, \
+    short: _GradCellAtIndex, \
+    int: _GradCellAtIndex, \
+    VecShort2D*: _GradCellAtPos, \
+    default: PBErrInvalidPolymorphism), \
+  const GradSquare*: _Generic(Pos, \
+    short: _GradCellAtIndex, \
+    int: _GradCellAtIndex, \
+    VecShort2D*: _GradCellAtPos, \
+    default: PBErrInvalidPolymorphism), \
+  const GradHexa*: _Generic(Pos, \
+    short: _GradCellAtIndex, \
+    int: _GradCellAtIndex, \
+    VecShort2D*: _GradCellAtPos, \
+    default: PBErrInvalidPolymorphism), \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_), Pos)
 
 #define GradGetArea(Grad_) _Generic(Grad_, \
   Grad*: _GradGetArea, \
   GradSquare*: _GradGetArea, \
   GradHexa*: _GradGetArea, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_))
+  const Grad*: _GradGetArea, \
+  const GradSquare*: _GradGetArea, \
+  const GradHexa*: _GradGetArea, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_))
 
 #define GradGetLookupTableMinDist(Grad_) _Generic(Grad_, \
   Grad*: _GradGetLookupTableMinDist, \
   GradSquare*: _GradGetLookupTableMinDist, \
   GradHexa*: _GradGetLookupTableMinDist, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_))
+  const Grad*: _GradGetLookupTableMinDist, \
+  const GradSquare*: _GradGetLookupTableMinDist, \
+  const GradHexa*: _GradGetLookupTableMinDist, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_))
 
 #define GradGetPath(Grad_, From, To, Dist) _Generic(Grad_, \
   Grad*: _GradGetPath, \
   GradSquare*: _GradGetPath, \
   GradHexa*: _GradGetPath, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_), From, To, Dist)
+  const Grad*: _GradGetPath, \
+  const GradSquare*: _GradGetPath, \
+  const GradHexa*: _GradGetPath, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_), From, To, Dist)
 
 #define GradFlood(Grad_, Sources, DistMax, StepMax) _Generic(Grad_, \
   Grad*: _GradFlood, \
@@ -468,35 +501,63 @@ void _GradAddAllLinkPos(Grad* that, VecShort2D* fromCell,
   Grad*: _GradGetFloodArea, \
   GradSquare*: _GradGetFloodArea, \
   GradHexa*: _GradGetFloodArea, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_), Source)
+  const Grad*: _GradGetFloodArea, \
+  const GradSquare*: _GradGetFloodArea, \
+  const GradHexa*: _GradGetFloodArea, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_), Source)
 
 #define GradDim(Grad_) _Generic(Grad_, \
   Grad*: _GradDim, \
   GradSquare*: _GradDim, \
   GradHexa*: _GradDim, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_))
+  const Grad*: _GradDim, \
+  const GradSquare*: _GradDim, \
+  const GradHexa*: _GradDim, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_))
 
 #define GradIsPosInside(Grad_, Pos) _Generic(Grad_, \
   Grad*: _GradIsPosInside, \
   GradSquare*: _GradIsPosInside, \
   GradHexa*: _GradIsPosInside, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_), Pos)
+  const Grad*: _GradIsPosInside, \
+  const GradSquare*: _GradIsPosInside, \
+  const GradHexa*: _GradIsPosInside, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_), Pos)
 
 #define GradClone(Grad_) _Generic(Grad_, \
   GradSquare*: GradSquareClone, \
   GradHexa*: GradHexaClone, \
+  const GradSquare*: GradSquareClone, \
+  const GradHexa*: GradHexaClone, \
   default: PBErrInvalidPolymorphism)(Grad_)
 
 #define GradIsSameAs(GradA, GradB) _Generic(GradA, \
   GradSquare*: _Generic(GradB, \
     GradSquare*: _GradIsSameAs, \
     GradHexa*: _GradIsSameAs, \
+    const GradSquare*: _GradIsSameAs, \
+    const GradHexa*: _GradIsSameAs, \
     default: PBErrInvalidPolymorphism), \
   GradHexa*: _Generic(GradB, \
     GradSquare*: _GradIsSameAs, \
     GradHexa*: _GradIsSameAs, \
+    const GradSquare*: _GradIsSameAs, \
+    const GradHexa*: _GradIsSameAs, \
     default: PBErrInvalidPolymorphism), \
-  default: PBErrInvalidPolymorphism)((Grad*)(GradA), (Grad*)(GradB))
+  const GradSquare*: _Generic(GradB, \
+    GradSquare*: _GradIsSameAs, \
+    GradHexa*: _GradIsSameAs, \
+    const GradSquare*: _GradIsSameAs, \
+    const GradHexa*: _GradIsSameAs, \
+    default: PBErrInvalidPolymorphism), \
+  const GradHexa*: _Generic(GradB, \
+    GradSquare*: _GradIsSameAs, \
+    GradHexa*: _GradIsSameAs, \
+    const GradSquare*: _GradIsSameAs, \
+    const GradHexa*: _GradIsSameAs, \
+    default: PBErrInvalidPolymorphism), \
+  default: PBErrInvalidPolymorphism)((const Grad*)(GradA), \
+    (const Grad*)(GradB))
 
 #define GradResetFlagBlocked(Grad_) _Generic(Grad_, \
   Grad*: _GradResetFlagBlocked, \
@@ -513,7 +574,10 @@ void _GradAddAllLinkPos(Grad* that, VecShort2D* fromCell,
   Grad*: _GradGetType, \
   GradSquare*: _GradGetType, \
   GradHexa*: _GradGetType, \
-  default: PBErrInvalidPolymorphism)((Grad*)(Grad_))
+  const Grad*: _GradGetType, \
+  const GradSquare*: _GradGetType, \
+  const GradHexa*: _GradGetType, \
+  default: PBErrInvalidPolymorphism)((const Grad*)(Grad_))
 
 #define GradRemoveLinkTo(Grad_, From, To, Sym) _Generic(Grad_, \
   Grad*: _Generic (From, \
