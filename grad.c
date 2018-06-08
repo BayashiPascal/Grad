@@ -770,7 +770,7 @@ void _GradFlood(Grad* const that, const VecShort* const sources,
   // been flooded
   while (GSetNbElem(&set) > 0) {
     // Get the distance up to this cell
-    float dist = GSetGetElem(&set, 0)->_sortVal;
+    float dist = GSetElement(&set, 0)->_sortVal;
     // Pop the cell
     GradFloodPod* pod = GSetPop(&set);
     // If the cell is inside the limit in nb of steps
