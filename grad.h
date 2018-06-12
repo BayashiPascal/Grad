@@ -81,7 +81,7 @@ void GradCellSetData(GradCell* const that, void* const data);
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* GradCellPos(const GradCell* const that);
+const VecShort2D* GradCellPos(const GradCell* const that);
 
 // Get the index of the GradCell 'that'
 #if BUILDMODE != 0
@@ -300,7 +300,7 @@ int _GradGetFloodArea(const Grad* const that, const int iSource);
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* _GradDim(const Grad* const that);
+const VecShort2D* _GradDim(const Grad* const that);
 
 // Check if the position 'pos' is inside the GradSquare 'that'
 #if BUILDMODE != 0

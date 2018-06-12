@@ -38,7 +38,7 @@ void GradCellSetData(GradCell* const that, void* const data) {
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* GradCellPos(const GradCell* const that) {
+const VecShort2D* GradCellPos(const GradCell* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -46,7 +46,7 @@ VecShort2D* GradCellPos(const GradCell* const that) {
     PBErrCatch(GradErr);
   }
 #endif
-  return (VecShort2D*)&(that->_pos);
+  return &(that->_pos);
 }
 
 // Get the index of the GradCell 'that'
@@ -329,7 +329,7 @@ int _GradGetArea(const Grad* const that) {
 #if BUILDMODE != 0
 inline
 #endif 
-VecShort2D* _GradDim(const Grad* const that) {
+const VecShort2D* _GradDim(const Grad* const that) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -337,7 +337,7 @@ VecShort2D* _GradDim(const Grad* const that) {
     PBErrCatch(GradErr);
   }
 #endif
-  return (VecShort2D*)&(that->_dim);
+  return &(that->_dim);
 }
 
 // Check if the position 'pos' is inside the GradSquare 'that'
