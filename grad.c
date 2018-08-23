@@ -720,7 +720,7 @@ VecShort* _GradGetPath(const Grad* const that, const int from,
 // Structure used for flooding
 typedef struct GradFloodPod {
   GradCell* _cell;
-  int _src;
+  long _src;
   int _nbStep;
 } GradFloodPod;
 
@@ -754,11 +754,11 @@ void _GradFlood(Grad* const that, const VecShort* const sources,
   for (int iCell = GradGetArea(that); iCell--;)
     GradCellSetFlood(GradCellAt(that, iCell), -1);
   // Get the nb of sources
-  int nbSrc = VecGetDim(sources);
+  long nbSrc = VecGetDim(sources);
   // Declare a set of GradFloodPod
   GSet set = GSetCreateStatic();
   // For each sources
-  for (int iSource = nbSrc; iSource--;) {
+  for (long iSource = nbSrc; iSource--;) {
     // Add the first cell in the set
     GradFloodPod* pod = PBErrMalloc(GradErr, sizeof(GradFloodPod));
     pod->_src = iSource;
