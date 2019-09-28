@@ -67,81 +67,81 @@ GradCell GradCellCreateStatic(const int id, const int nbLink,
 
 // Get the user data of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void* GradCellData(const GradCell* const that);
 
 // Set the user data of the GradCell 'that' to 'data'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void GradCellSetData(GradCell* const that, void* const data);
 
 // Get the position of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 const VecShort2D* GradCellPos(const GradCell* const that);
 
 // Get the index of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 int GradCellGetId(const GradCell* const that);
 
 // Get the index of 'iLink'-th link of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 int GradCellGetLink(const GradCell* const that, const int iLink);
 
 // Set the index of 'iLink'-th link of the GradCell 'that' to 'iCell'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void GradCellSetLink(GradCell* const that, const int iLink, 
   const int iCell);
 
 // Get the number of links of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 int GradCellGetNbLink(const GradCell* const that);
 
 // Get the value of 'iLink'-th link of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 float GradCellLinkVal(const GradCell* const that, const int iLink);
 
 // Set the value of 'iLink'-th link of the GradCell 'that' to 'val'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void GradCellSetLinkVal(GradCell* const that, const int iLink, 
   const float val);
 
 // Get the flood value of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 int GradCellGetFlood(const GradCell* const that);
 
 // Set the flood value of the GradCell 'that' to 'iSource'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void GradCellSetFlood(GradCell* const that, const int iSource);
 
 // Get the flag blocked of the GradCell 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 bool GradCellIsBlocked(const GradCell* const that);
 
 // Set the flag blocked of the GradCell 'that' to 'flag'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void GradCellSetBlocked(GradCell* const that, const bool flag);
 
@@ -224,39 +224,39 @@ void GradHexaFree(GradHexa** that);
 
 // Get the GradCell at index 'iCell' in the Grad 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 GradCell* _GradCellAtIndex(const Grad* const that, const int iCell);
 
 // Get the GradCell at position 'pos' int the Grad 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 GradCell* _GradCellAtPos(const Grad* const that, 
   const VecShort2D* const pos);
 
 // Get the GradType of the Grad 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 GradType _GradGetType(const Grad* const that);
 
 // Get the GradHexaType of the GradHexa 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 GradHexaType GradHexaGetType(const GradHexa* const that);
 
 // Return true if the GradSquare 'that' has diagonal link
 // Return false else
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 bool GradSquareHasDiagonalLink(const GradSquare* const that);
 
 // Get the number of cells (area) of the Grad 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 int _GradGetArea(const Grad* const that);
 
@@ -298,13 +298,13 @@ int _GradGetFloodArea(const Grad* const that, const int iSource);
 
 // Get the dimensions of the Grad 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 const VecShort2D* _GradDim(const Grad* const that);
 
 // Check if the position 'pos' is inside the GradSquare 'that'
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 bool _GradIsPosInside(const Grad* const that, 
   const VecShort2D* const pos);
@@ -325,7 +325,7 @@ bool _GradIsSameAs(const Grad* const that, const Grad* const tho);
 
 // Set the flag blocked of all cells in the Grad 'that' to false
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradResetFlagBlocked(Grad* const that);
 
@@ -341,7 +341,7 @@ void _GradRemoveLinkIndex(Grad* const that, const int fromCell,
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradRemoveLinkPos(Grad* const that, 
   const VecShort2D* const fromCell, const VecShort2D* const toCell, 
@@ -359,7 +359,7 @@ void _GradRemoveDirIndex(Grad* const that, const int fromCell,
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradRemoveDirPos(Grad* const that, 
   const VecShort2D* const fromCell, const int dir, const bool symmetric);
@@ -375,7 +375,7 @@ void _GradRemoveAllLinkIndex(Grad* const that, const int fromCell,
 // If 'symmetric' equals true the symetric links are removed too
 // (only if the link from 'fromCell' exists)
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradRemoveAllLinkPos(Grad* const that, 
   const VecShort2D* const fromCell, const bool symmetric);
@@ -392,7 +392,7 @@ void _GradAddLinkIndex(Grad* const that, const int fromCell,
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradAddLinkPos(Grad* const that, const VecShort2D* const fromCell, 
   const VecShort2D* const toCell, const bool symmetric);
@@ -409,7 +409,7 @@ void _GradAddDirIndex(Grad* const that, const int fromCell, const int dir,
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradAddDirPos(Grad* const that, const VecShort2D* const fromCell, 
   const int dir, const bool symmetric);
@@ -423,7 +423,7 @@ void _GradAddAllLinkIndex(Grad* const that, const int fromCell,
 // the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
 #if BUILDMODE != 0
-inline
+static inline
 #endif 
 void _GradAddAllLinkPos(Grad* const that, 
   const VecShort2D* const fromCell, const bool symmetric);
@@ -669,7 +669,7 @@ void _GradAddAllLinkPos(Grad* const that,
     default: PBErrInvalidPolymorphism), \
   default: PBErrInvalidPolymorphism) ((Grad*)(Grad_), From, Sym)
 
-// ================ Inliner ====================
+// ================ static inliner ====================
 
 #if BUILDMODE != 0
 #include "grad-inline.c"
