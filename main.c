@@ -765,7 +765,7 @@ void UnitTestGradGetPath() {
   int to = 85;
   VecShort* path = GradGetPath(grad, from, to, lookUp);
   VecPrint(path, stdout); printf("\n");
-  int check[9] = {12,13,24,35,46,57,66,75,85};
+  int check[9] = {12,23,24,35,46,57,66,75,85};
   for (int i = 9; i--;) {
     if (VecGet(path, i) != check[i]) {
       GradErr->_type = PBErrTypeUnitTestFailed;
