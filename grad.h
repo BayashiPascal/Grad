@@ -435,31 +435,49 @@ void _GradAddAllLinkPos(Grad* const that,
     short: _GradCellAtIndex, \
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
+    const short: _GradCellAtIndex, \
+    const int: _GradCellAtIndex, \
+    const VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
   GradSquare*: _Generic(Pos, \
     short: _GradCellAtIndex, \
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
+    const short: _GradCellAtIndex, \
+    const int: _GradCellAtIndex, \
+    const VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
   GradHexa*: _Generic(Pos, \
     short: _GradCellAtIndex, \
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
+    const short: _GradCellAtIndex, \
+    const int: _GradCellAtIndex, \
+    const VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
   const Grad*: _Generic(Pos, \
     short: _GradCellAtIndex, \
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
+    const short: _GradCellAtIndex, \
+    const int: _GradCellAtIndex, \
+    const VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
   const GradSquare*: _Generic(Pos, \
     short: _GradCellAtIndex, \
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
+    const short: _GradCellAtIndex, \
+    const int: _GradCellAtIndex, \
+    const VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
   const GradHexa*: _Generic(Pos, \
     short: _GradCellAtIndex, \
     int: _GradCellAtIndex, \
     VecShort2D*: _GradCellAtPos, \
+    const short: _GradCellAtIndex, \
+    const int: _GradCellAtIndex, \
+    const VecShort2D*: _GradCellAtPos, \
     default: PBErrInvalidPolymorphism), \
   default: PBErrInvalidPolymorphism)((const Grad*)(Grad_), Pos)
 
