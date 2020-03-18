@@ -452,6 +452,11 @@ void UnitTestGradGetSet() {
     sprintf(GradErr->_msg, "GradSquareHasDiagonalLink failed");
     PBErrCatch(GradErr);
   }
+  if (GradCellNeighbour(gradSquare, GradCellAt(gradSquare, 0), GradSquareDirE) != GradCellAt(gradSquare, 1)) {
+    GradErr->_type = PBErrTypeUnitTestFailed;
+    sprintf(GradErr->_msg, "GradCellNeighbour failed");
+    PBErrCatch(GradErr);
+  }
   GradFree(&gradSquare);
   GradFree(&gradHexa);
   printf("UnitTestGradGetSet OK\n");

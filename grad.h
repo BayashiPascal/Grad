@@ -235,6 +235,14 @@ static inline
 GradCell* _GradCellAtPos(const Grad* const that, 
   const VecShort2D* const pos);
 
+// Get the 'iLink'-th neighbour GradCell of the GradCell 'cell'
+// in the Grad 'that'
+#if BUILDMODE != 0
+static inline
+#endif 
+GradCell* _GradCellNeighbour(const Grad* const that,
+  const GradCell* const cell, const int iLink);
+
 // Get the GradType of the Grad 'that'
 #if BUILDMODE != 0
 static inline
@@ -686,6 +694,12 @@ void _GradAddAllLinkPos(Grad* const that,
     VecShort2D*: _GradAddAllLinkPos, \
     default: PBErrInvalidPolymorphism), \
   default: PBErrInvalidPolymorphism) ((Grad*)(Grad_), From, Sym)
+
+#define GradCellNeighbour(G, C, L) _Generic(G, \
+  Grad*: _GradCellNeighbour, \
+  GradSquare*: _GradCellNeighbour, \
+  GradHexa*: _GradCellNeighbour, \
+  default: PBErrInvalidPolymorphism)((Grad*)(G), C, L)
 
 // ================ static inliner ====================
 

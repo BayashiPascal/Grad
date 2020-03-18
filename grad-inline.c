@@ -230,6 +230,23 @@ void GradCellSetBlocked(GradCell* const that, const bool flag) {
   that->_flagBlocked = flag;
 }
 
+// Get the 'iLink'-th neighbour GradCell of the GradCell 'cell'
+// in the Grad 'that'
+#if BUILDMODE != 0
+static inline
+#endif 
+GradCell* _GradCellNeighbour(const Grad* const that,
+  const GradCell* const cell, const int iLink) {
+#if BUILDMODE == 0
+  if (that == NULL) {
+    GradErr->_type = PBErrTypeNullPointer;
+    sprintf(GradErr->_msg, "'that' is null");
+    PBErrCatch(GradErr);
+  }
+#endif
+  return GradCellAt(that, GradCellGetLink(cell, iLink));
+}
+
 // ------------- Grad
 
 // ================ Functions implementation ====================
