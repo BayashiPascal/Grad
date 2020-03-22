@@ -425,7 +425,7 @@ void UnitTestGradGetSet() {
     sprintf(GradErr->_msg, "GradGetArea failed");
     PBErrCatch(GradErr);
   }
-  if (GradCellAt(gradSquare, 1) != gradSquare->_grad._cells + 1) {
+  if (GradCellAt(gradSquare, 1L) != gradSquare->_grad._cells + 1) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradGetCell failed");
     PBErrCatch(GradErr);
@@ -452,7 +452,7 @@ void UnitTestGradGetSet() {
     sprintf(GradErr->_msg, "GradSquareHasDiagonalLink failed");
     PBErrCatch(GradErr);
   }
-  if (GradCellNeighbour(gradSquare, GradCellAt(gradSquare, 0), GradSquareDirE) != GradCellAt(gradSquare, 1)) {
+  if (GradCellNeighbour(gradSquare, GradCellAt(gradSquare, 0L), GradSquareDirE) != GradCellAt(gradSquare, 1L)) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradCellNeighbour failed");
     PBErrCatch(GradErr);
@@ -467,10 +467,10 @@ void UnitTestGradResetFlagBlocked() {
   VecShort2D dim = VecShortCreateStatic2D();
   VecSet(&dim, 0, 2); VecSet(&dim, 1, 3);
   GradSquare* grad = GradSquareCreate(&dim, diagLink);
-  for (int iCell = GradGetArea(grad); iCell--;)
+  for (long iCell = GradGetArea(grad); iCell--;)
     GradCellSetBlocked(GradCellAt(grad, iCell), true);
   GradResetFlagBlocked(grad);
-  for (int iCell = GradGetArea(grad); iCell--;)
+  for (long iCell = GradGetArea(grad); iCell--;)
     if (GradCellIsBlocked(GradCellAt(grad, iCell)) != false) {
       GradErr->_type = PBErrTypeUnitTestFailed;
       sprintf(GradErr->_msg, "GradResetFlagBlocked failed");
@@ -485,30 +485,30 @@ void UnitTestGradEditLinks() {
   VecShort2D dim = VecShortCreateStatic2D();
   VecSet(&dim, 0, 2); VecSet(&dim, 1, 3);
   GradSquare* grad = GradSquareCreate(&dim, diagLink);
-  GradRemoveLinkTo(grad, 0, 1, false);
-  if (GradCellGetLink(GradCellAt(grad, 0), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirW) != 0) {
+  GradRemoveLinkTo(grad, 0L, 1L, false);
+  if (GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirW) != 0) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveLinkTo failed");
     PBErrCatch(GradErr);
   }
-  GradAddLinkTo(grad, 0, 1, false);
-  if (GradCellGetLink(GradCellAt(grad, 0), GradSquareDirE) != 1 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirW) != 0) {
+  GradAddLinkTo(grad, 0L, 1L, false);
+  if (GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirE) != 1 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirW) != 0) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddLinkTo failed");
     PBErrCatch(GradErr);
   }
-  GradRemoveLinkTo(grad, 2, 3, true);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != -1) {
+  GradRemoveLinkTo(grad, 2L, 3L, true);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != -1) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveLinkTo failed");
     PBErrCatch(GradErr);
   }
-  GradAddLinkTo(grad, 2, 3, true);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != 3 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2) {
+  GradAddLinkTo(grad, 2L, 3L, true);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != 3 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddLinkTo failed");
     PBErrCatch(GradErr);
@@ -518,148 +518,148 @@ void UnitTestGradEditLinks() {
   VecShort2D to = VecShortCreateStatic2D();
   VecSet(&to, 0, 1); VecSet(&to, 1, 2);
   GradRemoveLinkTo(grad, &from, &to, true);
-  if (GradCellGetLink(GradCellAt(grad, 4), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirW) != -1) {
+  if (GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirW) != -1) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveLinkTo failed");
     PBErrCatch(GradErr);
   }
   GradAddLinkTo(grad, &from, &to, true);
-  if (GradCellGetLink(GradCellAt(grad, 4), GradSquareDirE) != 5 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirW) != 4) {
+  if (GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirE) != 5 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirW) != 4) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddLinkTo failed");
     PBErrCatch(GradErr);
   }
-  GradRemoveLinkToward(grad, 0, GradSquareDirE, false);
-  if (GradCellGetLink(GradCellAt(grad, 0), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirW) != 0) {
+  GradRemoveLinkToward(grad, 0L, GradSquareDirE, false);
+  if (GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirW) != 0) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveLinkToward failed");
     PBErrCatch(GradErr);
   }
-  GradAddLinkToward(grad, 0, GradSquareDirE, false);
-  if (GradCellGetLink(GradCellAt(grad, 0), GradSquareDirE) != 1 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirW) != 0) {
+  GradAddLinkToward(grad, 0L, GradSquareDirE, false);
+  if (GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirE) != 1 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirW) != 0) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddLinkToward failed");
     PBErrCatch(GradErr);
   }
-  GradRemoveLinkToward(grad, 2, GradSquareDirE, true);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != -1) {
+  GradRemoveLinkToward(grad, 2L, GradSquareDirE, true);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != -1) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveLinkToward failed");
     PBErrCatch(GradErr);
   }
-  GradAddLinkToward(grad, 2, GradSquareDirE, true);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != 3 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2) {
+  GradAddLinkToward(grad, 2L, GradSquareDirE, true);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != 3 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddLinkToward failed");
     PBErrCatch(GradErr);
   }
   GradRemoveLinkToward(grad, &from, GradSquareDirE, true);
-  if (GradCellGetLink(GradCellAt(grad, 4), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirW) != -1) {
+  if (GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirW) != -1) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveLinkToward failed");
     PBErrCatch(GradErr);
   }
   GradAddLinkToward(grad, &from, GradSquareDirE, true);
-  if (GradCellGetLink(GradCellAt(grad, 4), GradSquareDirE) != 5 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirW) != 4) {
+  if (GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirE) != 5 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirW) != 4) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddLinkToward failed");
     PBErrCatch(GradErr);
   }
-  GradRemoveAllLink(grad, 2, false);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirN) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirNE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirSE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirS) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 0), GradSquareDirS) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirSW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirNW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 4), GradSquareDirN) != 2) {
+  GradRemoveAllLink(grad, 2L, false);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirN) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirNE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirSE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirS) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirS) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirSW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirNW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirN) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveAllLink failed");
     PBErrCatch(GradErr);
   }
-  GradAddAllLink(grad, 2, false);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirN) != 0 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirNE) != 1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != 3 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirSE) != 5 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirS) != 4 ||
-    GradCellGetLink(GradCellAt(grad, 0), GradSquareDirS) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirSW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirNW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 4), GradSquareDirN) != 2) {
+  GradAddAllLink(grad, 2L, false);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirN) != 0 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirNE) != 1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != 3 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirSE) != 5 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirS) != 4 ||
+    GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirS) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirSW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirNW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirN) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddAllLink failed");
     PBErrCatch(GradErr);
   }
-  GradRemoveAllLink(grad, 2, true);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirN) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirNE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirSE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirS) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 0), GradSquareDirS) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirSW) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirNW) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 4), GradSquareDirN) != -1) {
+  GradRemoveAllLink(grad, 2L, true);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirN) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirNE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirSE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirS) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirS) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirSW) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirNW) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirN) != -1) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveAllLink failed");
     PBErrCatch(GradErr);
   }
-  GradAddAllLink(grad, 2, true);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirN) != 0 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirNE) != 1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != 3 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirSE) != 5 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirS) != 4 ||
-    GradCellGetLink(GradCellAt(grad, 0), GradSquareDirS) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirSW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirNW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 4), GradSquareDirN) != 2) {
+  GradAddAllLink(grad, 2L, true);
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirN) != 0 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirNE) != 1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != 3 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirSE) != 5 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirS) != 4 ||
+    GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirS) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirSW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirNW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirN) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddAllLink failed");
     PBErrCatch(GradErr);
   }
   VecSet(&from, 0, 0); VecSet(&from, 1, 1);
   GradRemoveAllLink(grad, &from, false);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirN) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirNE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirSE) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirS) != -1 ||
-    GradCellGetLink(GradCellAt(grad, 0), GradSquareDirS) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirSW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirNW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 4), GradSquareDirN) != 2) {
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirN) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirNE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirSE) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirS) != -1 ||
+    GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirS) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirSW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirNW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirN) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradRemoveAllLink failed");
     PBErrCatch(GradErr);
   }
   GradAddAllLink(grad, &from, false);
-  if (GradCellGetLink(GradCellAt(grad, 2), GradSquareDirN) != 0 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirNE) != 1 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirE) != 3 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirSE) != 5 ||
-    GradCellGetLink(GradCellAt(grad, 2), GradSquareDirS) != 4 ||
-    GradCellGetLink(GradCellAt(grad, 0), GradSquareDirS) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 1), GradSquareDirSW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 3), GradSquareDirW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 5), GradSquareDirNW) != 2 ||
-    GradCellGetLink(GradCellAt(grad, 4), GradSquareDirN) != 2) {
+  if (GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirN) != 0 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirNE) != 1 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirE) != 3 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirSE) != 5 ||
+    GradCellGetLink(GradCellAt(grad, 2L), GradSquareDirS) != 4 ||
+    GradCellGetLink(GradCellAt(grad, 0L), GradSquareDirS) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 1L), GradSquareDirSW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 3L), GradSquareDirW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 5L), GradSquareDirNW) != 2 ||
+    GradCellGetLink(GradCellAt(grad, 4L), GradSquareDirN) != 2) {
     GradErr->_type = PBErrTypeUnitTestFailed;
     sprintf(GradErr->_msg, "GradAddAllLink failed");
     PBErrCatch(GradErr);
@@ -673,7 +673,7 @@ void UnitTestGradLookupTable() {
   VecShort2D dim = VecShortCreateStatic2D();
   VecSet(&dim, 0, 2); VecSet(&dim, 1, 3);
   GradSquare* grad = GradSquareCreate(&dim, diagLink);
-  GradCellSetBlocked(GradCellAt(grad, 2), true);
+  GradCellSetBlocked(GradCellAt(grad, 2L), true);
   MatFloat* table = GradGetLookupTableMinDist(grad);
   if (table == NULL) {
     GradErr->_type = PBErrTypeUnitTestFailed;
@@ -702,11 +702,11 @@ void UnitTestGradFlood() {
   GradSquare* grad = GradSquareCreate(&dim, diagLink);
   VecShort2D sources = VecShortCreateStatic2D();
   VecSet(&sources, 0, 12); VecSet(&sources, 1, 98);
-  GradCellSetBlocked(GradCellAt(grad, 92), true);
-  GradCellSetBlocked(GradCellAt(grad, 32), true);
-  GradRemoveAllLink(grad, 8, true);
-  GradRemoveAllLink(grad, 18, true);
-  GradRemoveAllLink(grad, 19, true);
+  GradCellSetBlocked(GradCellAt(grad, 92L), true);
+  GradCellSetBlocked(GradCellAt(grad, 32L), true);
+  GradRemoveAllLink(grad, 8L, true);
+  GradRemoveAllLink(grad, 18L, true);
+  GradRemoveAllLink(grad, 19L, true);
   float distMax = 20.0;
   int stepMax = 20;
   GradFlood(grad, (VecShort*)&sources, distMax, stepMax);
@@ -757,17 +757,17 @@ void UnitTestGradGetPath() {
   VecShort2D dim = VecShortCreateStatic2D();
   VecSet(&dim, 0, 10); VecSet(&dim, 1, 10);
   GradSquare* grad = GradSquareCreate(&dim, diagLink);
-  GradRemoveAllLink(grad, 51, true);
-  GradRemoveAllLink(grad, 52, true);
-  GradRemoveAllLink(grad, 53, true);
-  GradRemoveAllLink(grad, 54, true);
-  GradCellSetBlocked(GradCellAt(grad, 55), true);
-  GradCellSetBlocked(GradCellAt(grad, 56), true);
-  GradRemoveAllLink(grad, 58, true);
-  GradRemoveAllLink(grad, 59, true);
+  GradRemoveAllLink(grad, 51L, true);
+  GradRemoveAllLink(grad, 52L, true);
+  GradRemoveAllLink(grad, 53L, true);
+  GradRemoveAllLink(grad, 54L, true);
+  GradCellSetBlocked(GradCellAt(grad, 55L), true);
+  GradCellSetBlocked(GradCellAt(grad, 56L), true);
+  GradRemoveAllLink(grad, 58L, true);
+  GradRemoveAllLink(grad, 59L, true);
   MatFloat* lookUp = GradGetLookupTableMinDist(grad);
-  int from = 12;
-  int to = 85;
+  long from = 12;
+  long to = 85;
   VecShort* path = GradGetPath(grad, from, to, lookUp);
   VecPrint(path, stdout); printf("\n");
   int check[9] = {12,23,24,35,46,57,66,75,85};

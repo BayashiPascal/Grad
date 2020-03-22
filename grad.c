@@ -15,12 +15,12 @@
 
 // Create a new GradCell with index 'id', position 'pos' and 
 // 'nbLink' links
-GradCell* GradCellCreate(const int id, const int nbLink, 
+GradCell* GradCellCreate(const long id, const int nbLink, 
   const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (id < 0) {
     GradErr->_type = PBErrTypeInvalidArg;
-    sprintf(GradErr->_msg, "'id' is invalid (%d>=0)", id);
+    sprintf(GradErr->_msg, "'id' is invalid (%ld>=0)", id);
     PBErrCatch(GradErr);
   }
   if (nbLink < 0 || nbLink > GRAD_NBMAXLINK) {
@@ -62,12 +62,12 @@ void GradCellFree(GradCell** that) {
 
 // Create a new static GradCell with index 'id', position 'pos' 
 // and 'nbLink' links
-GradCell GradCellCreateStatic(const int id, const int nbLink, 
+GradCell GradCellCreateStatic(const long id, const int nbLink, 
   const VecShort2D* const pos) {
 #if BUILDMODE == 0
   if (id < 0) {
     GradErr->_type = PBErrTypeInvalidArg;
-    sprintf(GradErr->_msg, "'id' is invalid (%d>=0)", id);
+    sprintf(GradErr->_msg, "'id' is invalid (%ld>=0)", id);
     PBErrCatch(GradErr);
   }
   if (nbLink < 0 || nbLink > GRAD_NBMAXLINK) {
@@ -173,10 +173,10 @@ Grad GradCreateStatic(const VecShort2D* const dim, const GradType type,
   // Set properties
   that._type = type;
   that._dim = *dim;
-  int area = GradGetArea(&that);
+  long area = GradGetArea(&that);
   that._cells = PBErrMalloc(GradErr, sizeof(GradCell) * area);
   VecShort2D pos = VecShortCreateStatic2D();
-  int iCell = 0;
+  long iCell = 0;
   // Loop on cells
   do {
     // Initialise the cell
@@ -521,21 +521,21 @@ MatFloat* _GradGetLookupTableMinDist(const Grad* const that) {
   }
 #endif
   // Get the area of the grad
-  int area = GradGetArea(that);
+  long area = GradGetArea(that);
   // Create the result matrix
   VecShort2D dim = VecShortCreateStatic2D();
   VecSet(&dim, 0, area); VecSet(&dim, 1, area);
   MatFloat* table = MatFloatCreate(&dim);
   // Initialise the table
-  for (int iCell = area * area; iCell--;)
+  for (long long iCell = area * area; iCell--;)
     table->_val[iCell] = -1.0;
   VecShort2D pair = VecShortCreateStatic2D();
-  for (int iCell = area; iCell--;) {
+  for (long iCell = area; iCell--;) {
     VecSet(&pair, 0, iCell);
     GradCell* cellFrom = GradCellAt(that, iCell);
     if (!GradCellIsBlocked(cellFrom)) {
       for (int iLink = GradCellGetNbLink(cellFrom); iLink--;) {
-        int link = GradCellGetLink(cellFrom, iLink);
+        long link = GradCellGetLink(cellFrom, iLink);
         if (link != -1 &&
           !GradCellIsBlocked(GradCellAt(that, link))) {
           VecSet(&pair, 1, GradCellGetLink(cellFrom, iLink));
@@ -545,7 +545,7 @@ MatFloat* _GradGetLookupTableMinDist(const Grad* const that) {
     }
   }
   // Loop until there is no more modification or we reach area steps
-  int nbStep = 0;
+  long nbStep = 0;
   bool flagModif;
   VecShort2D pairA = VecShortCreateStatic2D();
   VecShort2D pairB = VecShortCreateStatic2D();
@@ -561,7 +561,7 @@ MatFloat* _GradGetLookupTableMinDist(const Grad* const that) {
         float min = -1.0;
         VecSet(&pairA, 0, VecGet(&pair, 0));
         VecSet(&pairB, 1, VecGet(&pair, 1));
-        for (int k = area; k--;) {
+        for (long k = area; k--;) {
           // If the other cell is different than the one in the 
           // current pair
           if (k != VecGet(&pair, 0) && k != VecGet(&pair, 1)) {
@@ -597,8 +597,8 @@ MatFloat* _GradGetLookupTableMinDist(const Grad* const that) {
 // for distance estimation between cells
 // Return a VecShort of position (index) ordered from 'from' to 'to'
 // Return NULL if there is no path
-VecShort* _GradGetPath(const Grad* const that, const int from, 
-  const int to, const MatFloat* const lookup) {
+VecShort* _GradGetPath(const Grad* const that, const long from, 
+  const long to, const MatFloat* const lookup) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -625,7 +625,7 @@ VecShort* _GradGetPath(const Grad* const that, const int from,
   // Init the GSet with the starting cell
   GSetPush(&openList, cell);
   // Get the area of the grad
-  int area = GradGetArea(that);
+  long area = GradGetArea(that);
   // Declare arrays for computation
   float* f = PBErrMalloc(GradErr, sizeof(float) * area);
   float* g = PBErrMalloc(GradErr, sizeof(float) * area);
@@ -634,7 +634,7 @@ VecShort* _GradGetPath(const Grad* const that, const int from,
   bool* flagClose = PBErrMalloc(GradErr, sizeof(bool) * area);
   int* prev = PBErrMalloc(GradErr, sizeof(int) * area);
   // Init the arrays
-  for (int i = area; i--;) {
+  for (long i = area; i--;) {
     f[i] = dist;
     g[i] = 0.0;
     h[i] = dist;
@@ -646,7 +646,7 @@ VecShort* _GradGetPath(const Grad* const that, const int from,
   // Loop until we have elements in the openList
   while (GSetNbElem(&openList) > 0) {
     cell = GSetPop(&openList);
-    int iCell = GradCellGetId(cell);
+    long iCell = GradCellGetId(cell);
     if (iCell == to) {
       while (iCell != -1) {
         GSetPush(&path, cell);
@@ -659,7 +659,7 @@ VecShort* _GradGetPath(const Grad* const that, const int from,
       flagClose[iCell] = true;
       float curDist = g[iCell];
       for (int iDir = GradCellGetNbLink(cell); iDir--;) {
-        int ncell = GradCellGetLink(cell, iDir);
+        long ncell = GradCellGetLink(cell, iDir);
         if (ncell != -1) {
           if (flagClose[ncell] == false) {
             GradCell* nextCell = GradCellAt(that, ncell);
@@ -707,7 +707,7 @@ VecShort* _GradGetPath(const Grad* const that, const int from,
     return NULL;
   } else {
     VecShort* res = VecShortCreate(GSetNbElem(&path));
-    int i = 0;
+    long i = 0;
     while(GSetNbElem(&path) > 0) {
       cell = GSetPop(&path);
       VecSet(res, i, GradCellGetId(cell));
@@ -751,7 +751,7 @@ void _GradFlood(Grad* const that, const VecShort* const sources,
   }
 #endif
   // Reset all the flood value to -1
-  for (int iCell = GradGetArea(that); iCell--;)
+  for (long iCell = GradGetArea(that); iCell--;)
     GradCellSetFlood(GradCellAt(that, iCell), -1);
   // Get the nb of sources
   long nbSrc = VecGetDim(sources);
@@ -801,7 +801,7 @@ void _GradFlood(Grad* const that, const VecShort* const sources,
         GradCellSetFlood(pod->_cell, pod->_src);
         // Loop on direction from this cell
         for (int iLink = GradCellGetNbLink(pod->_cell); iLink--;) {
-          int toCell = GradCellGetLink(pod->_cell, iLink);
+          long toCell = GradCellGetLink(pod->_cell, iLink);
           // If there is a cell in this direction
           if (toCell != -1) {
             // Get the distance to this cell from the source
@@ -838,7 +838,7 @@ void _GradFlood(Grad* const that, const VecShort* const sources,
 
 // Get the number of flooded cells from 'iSource'-th source in the Grad
 // 'that'
-int _GradGetFloodArea(const Grad* const that, const int iSource) {
+long _GradGetFloodArea(const Grad* const that, const long iSource) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -847,9 +847,9 @@ int _GradGetFloodArea(const Grad* const that, const int iSource) {
   }
 #endif
   // Declare a variable to memorize the result
-  int nb = 0;
+  long nb = 0;
   // Loop on cells
-  for (int iCell = GradGetArea(that); iCell--;) {
+  for (long iCell = GradGetArea(that); iCell--;) {
     // If the flood value of the cell is the serached value
     if (GradCellGetFlood(GradCellAt(that, iCell)) == iSource)
       // Increment the result
@@ -930,7 +930,7 @@ bool _GradIsSameAs(const Grad* const that, const Grad* const tho) {
       ((GradHexa*)that)->_type != ((GradHexa*)tho)->_type)) {
     return false;
   } else {
-    for (int iCell = GradGetArea(that); iCell--;) {
+    for (long iCell = GradGetArea(that); iCell--;) {
       GradCell* cellA = GradCellAt(that, iCell);
       GradCell* cellB = GradCellAt(tho, iCell);
       if (cellA->_data != cellB->_data ||
@@ -954,8 +954,8 @@ bool _GradIsSameAs(const Grad* const that, const Grad* const tho) {
 // Grad 'that'
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveLinkIndex(Grad* const that, const int fromCell, 
-  const int toCell, const bool symmetric) {
+void _GradRemoveLinkIndex(Grad* const that, const long fromCell, 
+  const long toCell, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
     GradErr->_type = PBErrTypeNullPointer;
@@ -983,7 +983,7 @@ void _GradRemoveLinkIndex(Grad* const that, const int fromCell,
 // 'dir' in the Grad 'that'
 // If 'symmetric' equals true the symetric link is removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveDirIndex(Grad* const that, const int fromCell, 
+void _GradRemoveDirIndex(Grad* const that, const long fromCell, 
   const int dir, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
@@ -995,7 +995,7 @@ void _GradRemoveDirIndex(Grad* const that, const int fromCell,
   // Get the cell
   GradCell* cell = GradCellAt(that, fromCell);
   // Get the neighbour cell
-  int toCell = GradCellGetLink(cell, dir);
+  long toCell = GradCellGetLink(cell, dir);
   // If there is a link in this direction
   if (toCell != -1) {
     // If we have to remove the symmetric link
@@ -1009,7 +1009,7 @@ void _GradRemoveDirIndex(Grad* const that, const int fromCell,
 // Remove all the links from cell 'fromCell' in the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
 // (only if the link from 'fromCell' exists)
-void _GradRemoveAllLinkIndex(Grad* const that, const int fromCell, 
+void _GradRemoveAllLinkIndex(Grad* const that, const long fromCell, 
   const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
@@ -1022,7 +1022,7 @@ void _GradRemoveAllLinkIndex(Grad* const that, const int fromCell,
   GradCell* cell = GradCellAt(that, fromCell);
   for (int iLink = GradCellGetNbLink(cell); iLink--;) {
     // Memorize the link
-    int toCell = GradCellGetLink(cell, iLink);
+    long toCell = GradCellGetLink(cell, iLink);
     // Remove the link
     GradCellSetLink(cell, iLink, -1);
     // If we have to remove the symmetric link and it exists
@@ -1035,7 +1035,7 @@ void _GradRemoveAllLinkIndex(Grad* const that, const int fromCell,
 // Grad 'that'
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
-void _GradAddLinkIndex(Grad* const that, int fromCell, int toCell, 
+void _GradAddLinkIndex(Grad* const that, long fromCell, long toCell, 
   bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
@@ -1073,7 +1073,7 @@ void _GradAddLinkIndex(Grad* const that, int fromCell, int toCell,
 // 'dir' in the Grad 'that'
 // If the cells are not neighbours do nothing
 // If 'symmetric' equals true the symetric link is added too
-void _GradAddDirIndex(Grad* const that, int const fromCell, 
+void _GradAddDirIndex(Grad* const that, long const fromCell, 
   const int dir, const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
@@ -1094,7 +1094,7 @@ void _GradAddDirIndex(Grad* const that, int const fromCell,
   if (GradIsPosInside(that, &p)) {
     // Get the neighbour cell
     GradCell* cellTo = GradCellAt(that, &p);
-    int toCell = GradCellGetId(cellTo);
+    long toCell = GradCellGetId(cellTo);
     // Set the link
     GradCellSetLink(cell, dir, toCell);
     // If we have to add the symmetric link
@@ -1105,7 +1105,7 @@ void _GradAddDirIndex(Grad* const that, int const fromCell,
 
 // Add all the links from cell 'fromCell' in the Grad 'that'
 // If 'symmetric' equals true the symetric links are removed too
-void _GradAddAllLinkIndex(Grad* const that, const int fromCell, 
+void _GradAddAllLinkIndex(Grad* const that, const long fromCell, 
   const bool symmetric) {
 #if BUILDMODE == 0
   if (that == NULL) {
@@ -1128,7 +1128,7 @@ void _GradAddAllLinkIndex(Grad* const that, const int fromCell,
     // If the position is inside the Grad
     if (GradIsPosInside(that, &p)) {
       GradCell* cellTo = GradCellAt(that, &p);
-      int toCell = GradCellGetId(cellTo);
+      long toCell = GradCellGetId(cellTo);
       // Add the link
       GradCellSetLink(cell, iLink, toCell);
       // If we have to add the symmetric link
